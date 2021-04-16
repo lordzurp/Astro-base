@@ -33,28 +33,35 @@ rtc-ds1307
 Next, setup Raspberry's i2c communication
 
 detect your rtc device
+
     sudo i2cdetect -y 1<br>or<br>sudo i2cdetect -y 0
 
 Modify your system line
+
     sudo nano /etc/rc.local
 
 Add the following two lines before the exit 0 line :
+
     echo ds1307 0x68 > /sys/class/i2c-adapter/i2c-1/new_device
     hwclock -s
 
 
 Reboot your pi
+
     sudo reboot
 
 Finally, setup date on RTC
 
 change your Raspberry Pi system time
+
     sudo date -s "20 NOV 2015 18:49:00"
 
 write the rtc module
+
     sudo hwclock -w
 
 match your system and rtc module
+
     sudo date; sudo hwclock -r
 
 
